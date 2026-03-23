@@ -11,7 +11,13 @@ public class InMemoryScoreboard {
         matches.add(new Match(homeTeam, awayTeam));
     }
 
-    public List<Match> getSummary() {
-        return matches;
+    public void updateScore(int homeScore, int awayScore) {
+        // TODO: implement in next commit
+    }
+
+    public List<String> getSummary() {
+        return matches.stream()
+                .map(m -> m.homeTeam + " " + m.homeScore + " - " + m.awayTeam + " " + m.awayScore)
+                .toList();
     }
 }
