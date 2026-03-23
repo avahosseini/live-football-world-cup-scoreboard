@@ -9,4 +9,10 @@ public class Match {
     int awayScore;
 
     long startTime;
+
+    public Match(String homeTeam, String awayTeam) {
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+
+    }
 }

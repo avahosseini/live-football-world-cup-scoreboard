@@ -1,15 +1,17 @@
 package com.ava.scoreboard;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 public class InMemoryScoreboard {
 
+    private final List<Match> matches = new ArrayList<>();
+
     public void startMatch(String homeTeam, String awayTeam) {
-        // TODO: implement in next commit
+        matches.add(new Match(homeTeam, awayTeam));
     }
 
-    public List<?> getSummary() {
-        return Collections.emptyList();
+    public List<Match> getSummary() {
+        return matches;
     }
 }
