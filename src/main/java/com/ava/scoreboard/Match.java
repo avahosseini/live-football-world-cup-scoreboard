@@ -10,9 +10,12 @@ public class Match {
 
     long startTime;
 
-    public Match(String homeTeam, String awayTeam) {
+    public Match(String homeTeam, String awayTeam, Long startTime) {
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
+        this.homeScore = 0;
+        this.awayScore = 0;
+        this.startTime = startTime;
 
     }
 }

@@ -1,14 +1,16 @@
 package com.ava.scoreboard;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class InMemoryScoreboard {
 
     private final List<Match> matches = new ArrayList<>();
+    private long sequence = 0;
 
     public void startMatch(String homeTeam, String awayTeam) {
-        matches.add(new Match(homeTeam, awayTeam));
+        matches.add(new Match(homeTeam, awayTeam, ++sequence));
     }
 
     public void updateScore(int homeScore, int awayScore) {
@@ -26,7 +28,11 @@ public class InMemoryScoreboard {
     }
 
     public List<String> getSummary() {
+        Comparator<Match> byTotalThenRecency =
+                Comparator.comparingInt((Match m) -> m.homeScore + m.awayScore).thenComparingLong(m -> m.startTime).reversed();
+
         return matches.stream()
+                .sorted(byTotalThenRecency)
                 .map(m -> m.homeTeam + " " + m.homeScore + " - " + m.awayTeam + " " + m.awayScore)
                 .toList();
     }

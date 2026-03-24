@@ -64,7 +64,7 @@ class ScoreboardTest {
 
             assertEquals(
                     List.of(
-                            "Uruguay 6 Italy 6",
+                            "Uruguay 6 - Italy 6",
                             "Spain 10 - Brazil 2",
                             "Mexico 0 - Canada 5",
                             "Argentina 3 - Australia 1",
