@@ -2,6 +2,8 @@ package com.ava.scoreboard;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import java.util.List;
 
 class ScoreboardTest {
@@ -86,6 +88,15 @@ class ScoreboardTest {
         InMemoryScoreboard scoreboard = new InMemoryScoreboard();
 
         scoreboard.finishMatch();
+
+        assertEquals(List.of(), scoreboard.getSummary());
+    }
+
+    @Test
+    void shouldIgnoreUpdateScoreWhenNoMatches() {
+        InMemoryScoreboard scoreboard = new InMemoryScoreboard();
+
+        scoreboard.updateScore(2, 1);
 
         assertEquals(List.of(), scoreboard.getSummary());
     }
