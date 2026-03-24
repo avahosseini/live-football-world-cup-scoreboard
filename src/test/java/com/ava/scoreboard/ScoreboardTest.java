@@ -144,4 +144,14 @@ class ScoreboardTest {
         );
     }
 
+    @Test
+    void shouldRejectNegativeScoresOnUpdate() {
+        InMemoryScoreboard scoreboard = new InMemoryScoreboard();
+        scoreboard.startMatch("Mexico", "Canada");
+
+        assertThrows(IllegalArgumentException.class, () -> scoreboard.updateScore(-1, 0));
+        assertThrows(IllegalArgumentException.class, () -> scoreboard.updateScore(0, -1));
+
+    }
+
 }

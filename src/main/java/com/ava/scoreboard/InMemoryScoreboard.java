@@ -14,6 +14,10 @@ public class InMemoryScoreboard {
     }
 
     public void updateScore(int homeScore, int awayScore) {
+        if (homeScore < 0 || awayScore < 0) {
+            throw new IllegalArgumentException("Scores cannot be negative");
+        }
+
         if (matches.isEmpty()) {
             return;
         }
