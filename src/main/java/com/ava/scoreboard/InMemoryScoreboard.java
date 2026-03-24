@@ -18,7 +18,11 @@ public class InMemoryScoreboard {
     }
 
     public void finishMatch() {
-        // TODO: implement in next commit
+        if (matches.isEmpty()) {
+            return; // no-op when there is nothing to finish
+        }
+
+        matches.remove(matches.size() - 1);
     }
 
     public List<String> getSummary() {
