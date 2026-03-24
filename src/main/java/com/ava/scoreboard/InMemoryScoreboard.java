@@ -14,6 +14,10 @@ public class InMemoryScoreboard {
     }
 
     public void updateScore(int homeScore, int awayScore) {
+        if (matches.isEmpty()) {
+            return;
+        }
+
         Match latest = matches.get(matches.size() - 1);
         latest.homeScore = homeScore;
         latest.awayScore = awayScore;
