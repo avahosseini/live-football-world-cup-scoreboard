@@ -10,6 +10,11 @@ public class InMemoryScoreboard {
     private long sequence = 0;
 
     public void startMatch(String homeTeam, String awayTeam) {
+        if (homeTeam == null || awayTeam == null ||
+                homeTeam.isBlank() || awayTeam.isBlank()) {
+            throw new IllegalArgumentException("Team names cannot be null or blank");
+        }
+
         matches.add(new Match(homeTeam, awayTeam, ++sequence));
     }
 
