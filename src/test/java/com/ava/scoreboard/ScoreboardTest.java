@@ -101,4 +101,27 @@ class ScoreboardTest {
         assertEquals(List.of(), scoreboard.getSummary());
     }
 
+    @Test
+    void shouldOrderByRecencyWhenTotalsAreEqual() {
+        InMemoryScoreboard scoreboard = new InMemoryScoreboard();
+
+        scoreboard.startMatch("Mexico", "Canada");
+        scoreboard.updateScore(2, 2);
+
+        scoreboard.startMatch("Spain", "Brazil");
+        scoreboard.updateScore(3, 1);
+
+        scoreboard.startMatch("Germany", "France");
+        scoreboard.updateScore(0, 4);
+
+        assertEquals(
+                List.of(
+                        "Germany 0 - France 4",
+                        "Spain 3 - Brazil 1",
+                        "Mexico 2 - Canada 2"
+                ),
+                scoreboard.getSummary()
+        );
+    }
+
 }
