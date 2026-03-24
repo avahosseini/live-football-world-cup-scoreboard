@@ -81,4 +81,13 @@ class ScoreboardTest {
         assertEquals(List.of(), scoreboard.getSummary());
     }
 
+    @Test
+    void shouldDoNothingWhenFinishingEmptyScoreboard() {
+        InMemoryScoreboard scoreboard = new InMemoryScoreboard();
+
+        scoreboard.finishMatch();
+
+        assertEquals(List.of(), scoreboard.getSummary());
+    }
+
 }
