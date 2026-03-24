@@ -15,7 +15,14 @@ public class InMemoryScoreboard {
             throw new IllegalArgumentException("Team names cannot be null or blank");
         }
 
+        for (Match m : matches) {
+            if (m.homeTeam.equals(homeTeam) && m.awayTeam.equals(awayTeam)) {
+                throw new IllegalArgumentException("Match already in progress");
+            }
+        }
+
         matches.add(new Match(homeTeam, awayTeam, ++sequence));
+
     }
 
     public void updateScore(int homeScore, int awayScore) {

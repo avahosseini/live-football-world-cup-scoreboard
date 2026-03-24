@@ -154,4 +154,23 @@ class ScoreboardTest {
 
     }
 
+    @Test
+    void shouldRejectNullOrBlankTeamNamesOnStart() {
+        InMemoryScoreboard scoreboard = new InMemoryScoreboard();
+
+        assertThrows(IllegalArgumentException.class, () -> scoreboard.startMatch(null, "Canada"));
+        assertThrows(IllegalArgumentException.class, () -> scoreboard.startMatch("Mexico", null));
+        assertThrows(IllegalArgumentException.class, () -> scoreboard.startMatch("", "Canada"));
+        assertThrows(IllegalArgumentException.class, () -> scoreboard.startMatch("Mexico", "   "));
+    }
+
+    @Test
+    void shouldRejectDuplicateMatchPairingWhileInProgress() {
+        InMemoryScoreboard scoreboard = new InMemoryScoreboard();
+
+        scoreboard.startMatch("Mexico", "Canada");
+
+        assertThrows(IllegalArgumentException.class, () -> scoreboard.startMatch("Mexico", "Canada"));
+    }
+
 }
