@@ -12,7 +12,9 @@ public class InMemoryScoreboard {
     }
 
     public void updateScore(int homeScore, int awayScore) {
-        // TODO: implement in next commit
+        Match latest = matches.get(matches.size() - 1);
+        latest.homeScore = homeScore;
+        latest.awayScore = awayScore;
     }
 
     public List<String> getSummary() {
