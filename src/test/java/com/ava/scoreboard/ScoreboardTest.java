@@ -124,4 +124,24 @@ class ScoreboardTest {
         );
     }
 
+    @Test
+    void shouldUpdateNewLatestAfterFinishingLatestMatch() {
+        InMemoryScoreboard scoreboard = new InMemoryScoreboard();
+
+        scoreboard.startMatch("Mexico", "Canada");
+        scoreboard.updateScore(1, 0);
+
+        scoreboard.startMatch("Spain", "Brazil");
+        scoreboard.updateScore(2, 2);
+
+        scoreboard.finishMatch(); // removes Spain-Brazil (latest)
+
+        scoreboard.updateScore(3, 1); // should now update Mexico-Canada
+
+        assertEquals(
+                List.of("Mexico 3 - Canada 1"),
+                scoreboard.getSummary()
+        );
+    }
+
 }
