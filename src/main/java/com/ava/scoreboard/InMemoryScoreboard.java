@@ -17,6 +17,10 @@ public class InMemoryScoreboard {
         latest.awayScore = awayScore;
     }
 
+    public void finishMatch() {
+        // TODO: implement in next commit
+    }
+
     public List<String> getSummary() {
         return matches.stream()
                 .map(m -> m.homeTeam + " " + m.homeScore + " - " + m.awayTeam + " " + m.awayScore)

@@ -24,4 +24,24 @@ class ScoreboardTest {
 
         assertEquals(List.of("Mexico 2 - Canada 1"),scoreboard.getSummary());
     }
+
+    @Test
+    void shouldFinishLatestMatch() {
+        InMemoryScoreboard scoreboard = new InMemoryScoreboard();
+
+        scoreboard.startMatch("Mexico", "Canada");
+        scoreboard.updateScore(2, 1);
+
+        scoreboard.startMatch("Spain", "Brazil");
+        scoreboard.updateScore(10, 2);
+
+        scoreboard.finishMatch();
+
+        assertEquals(
+                List.of("Mexico 2 - Canada 1"),
+                scoreboard.getSummary()
+        );
+
+
+    }
 }
