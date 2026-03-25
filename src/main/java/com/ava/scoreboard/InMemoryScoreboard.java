@@ -10,14 +10,13 @@ public class InMemoryScoreboard {
     private long sequence = 0;
 
     public void startMatch(String homeTeam, String awayTeam) {
-        if (homeTeam == null || awayTeam == null ||
-                homeTeam.isBlank() || awayTeam.isBlank()) {
-            throw new IllegalArgumentException("Team names cannot be null or blank");
+        if (homeTeam == null || awayTeam == null || homeTeam.isBlank() || awayTeam.isBlank()) {
+            throw new IllegalArgumentException("Team names must not be null or blank");
         }
 
         for (Match m : matches) {
-            if (m.homeTeam.equals(homeTeam) && m.awayTeam.equals(awayTeam)) {
-                throw new IllegalArgumentException("Match already in progress");
+            if (m.getHomeTeam().equals(homeTeam) && m.getAwayTeam().equals(awayTeam)) {
+                throw new IllegalArgumentException("Match with same teams is already in progress");
             }
         }
 
@@ -34,26 +33,26 @@ public class InMemoryScoreboard {
             return;
         }
 
-        Match latest = matches.get(matches.size() - 1);
-        latest.homeScore = homeScore;
-        latest.awayScore = awayScore;
+        Match latest = getLatestMatch();
+        latest.updateScore(homeScore, awayScore);
+
     }
 
     public void finishMatch() {
         if (matches.isEmpty()) {
-            return; // no-op when there is nothing to finish
+            return;
         }
 
-        matches.remove(matches.size() - 1);
+        matches.remove(getLatestMatch());
+    }
+
+    private Match getLatestMatch() {
+        return matches.get(matches.size() - 1);
     }
 
     public List<String> getSummary() {
-        Comparator<Match> byTotalThenRecency =
-                Comparator.comparingInt((Match m) -> m.homeScore + m.awayScore).thenComparingLong(m -> m.startTime).reversed();
+        Comparator<Match> byTotalThenRecency = Comparator.comparingInt((Match m) -> m.getHomeScore() + m.getAwayScore()).thenComparingLong(m -> m.getStartTime()).reversed();
 
-        return matches.stream()
-                .sorted(byTotalThenRecency)
-                .map(m -> m.homeTeam + " " + m.homeScore + " - " + m.awayTeam + " " + m.awayScore)
-                .toList();
+        return matches.stream().sorted(byTotalThenRecency).map(m -> m.getHomeTeam() + " " + m.getHomeScore() + " - " + m.getAwayTeam() + " " + m.getAwayScore()).toList();
     }
 }

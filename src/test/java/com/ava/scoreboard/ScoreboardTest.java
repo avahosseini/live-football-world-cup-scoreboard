@@ -1,10 +1,11 @@
 package com.ava.scoreboard;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ScoreboardTest {
 
@@ -24,7 +25,7 @@ class ScoreboardTest {
         scoreboard.startMatch("Mexico", "Canada");
         scoreboard.updateScore(2, 1);
 
-        assertEquals(List.of("Mexico 2 - Canada 1"),scoreboard.getSummary());
+        assertEquals(List.of("Mexico 2 - Canada 1"), scoreboard.getSummary());
     }
 
     @Test
@@ -39,10 +40,7 @@ class ScoreboardTest {
 
         scoreboard.finishMatch();
 
-        assertEquals(
-                List.of("Mexico 2 - Canada 1"),
-                scoreboard.getSummary()
-        );
+        assertEquals(List.of("Mexico 2 - Canada 1"), scoreboard.getSummary());
     }
 
     @Test
@@ -64,16 +62,7 @@ class ScoreboardTest {
         scoreboard.startMatch("Argentina", "Australia");
         scoreboard.updateScore(3, 1);
 
-        assertEquals(
-                List.of(
-                        "Uruguay 6 - Italy 6",
-                        "Spain 10 - Brazil 2",
-                        "Mexico 0 - Canada 5",
-                        "Argentina 3 - Australia 1",
-                        "Germany 2 - France 2"
-                ),
-                scoreboard.getSummary()
-        );
+        assertEquals(List.of("Uruguay 6 - Italy 6", "Spain 10 - Brazil 2", "Mexico 0 - Canada 5", "Argentina 3 - Australia 1", "Germany 2 - France 2"), scoreboard.getSummary());
     }
 
     @Test
@@ -114,14 +103,7 @@ class ScoreboardTest {
         scoreboard.startMatch("Germany", "France");
         scoreboard.updateScore(0, 4);
 
-        assertEquals(
-                List.of(
-                        "Germany 0 - France 4",
-                        "Spain 3 - Brazil 1",
-                        "Mexico 2 - Canada 2"
-                ),
-                scoreboard.getSummary()
-        );
+        assertEquals(List.of("Germany 0 - France 4", "Spain 3 - Brazil 1", "Mexico 2 - Canada 2"), scoreboard.getSummary());
     }
 
     @Test
@@ -134,14 +116,11 @@ class ScoreboardTest {
         scoreboard.startMatch("Spain", "Brazil");
         scoreboard.updateScore(2, 2);
 
-        scoreboard.finishMatch(); // removes Spain-Brazil (latest)
+        scoreboard.finishMatch();
 
-        scoreboard.updateScore(3, 1); // should now update Mexico-Canada
+        scoreboard.updateScore(3, 1);
 
-        assertEquals(
-                List.of("Mexico 3 - Canada 1"),
-                scoreboard.getSummary()
-        );
+        assertEquals(List.of("Mexico 3 - Canada 1"), scoreboard.getSummary());
     }
 
     @Test

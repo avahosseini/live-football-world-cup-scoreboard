@@ -2,13 +2,13 @@ package com.ava.scoreboard;
 
 public class Match {
 
-    String homeTeam;
-    String awayTeam;
+    private final String homeTeam;
+    private final String awayTeam;
 
-    int homeScore;
-    int awayScore;
+    private int homeScore;
+    private int awayScore;
 
-    long startTime;
+    private final long startTime;
 
     public Match(String homeTeam, String awayTeam, Long startTime) {
         this.homeTeam = homeTeam;
@@ -16,6 +16,30 @@ public class Match {
         this.homeScore = 0;
         this.awayScore = 0;
         this.startTime = startTime;
+    }
 
+    public String getHomeTeam() {
+        return homeTeam;
+    }
+
+    public String getAwayTeam() {
+        return awayTeam;
+    }
+
+    public int getHomeScore() {
+        return homeScore;
+    }
+
+    public int getAwayScore() {
+        return awayScore;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void updateScore(int homeScore, int awayScore) {
+        this.homeScore = homeScore;
+        this.awayScore = awayScore;
     }
 }
